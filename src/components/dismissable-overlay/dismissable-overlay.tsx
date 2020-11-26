@@ -20,6 +20,7 @@ export const DissmissableOverlay: React.FC<{ onClose: any }> = ({
     return () => {
       document.removeEventListener("click", clickListener);
     };
+    // eslint-disable-next-line
   }, []);
   return <div ref={ref}>{children}</div>;
 };
