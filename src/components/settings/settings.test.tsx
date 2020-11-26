@@ -12,7 +12,7 @@ const renderSetting = () =>
   );
 
 test("renders settings modal open/close", () => {
-  const { getByText, getByTestId } = renderSetting();
+  const {  getByTestId } = renderSetting();
 
   const settingsButton = getByTestId(/settings/i);
   expect(settingsButton).toBeInTheDocument();

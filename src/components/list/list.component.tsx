@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { DissmissableOverlay } from "../dismissable-overlay/dismissable-overlay";
+import Modal from "../modal/modal.component";
 
 export type ListItem = {
   id: string;
@@ -16,6 +18,7 @@ type ListProps = {
 
 const List = ({ data = [], totalCount, loadMore }: ListProps) => {
   const isEndListReached = () => totalCount <= data.length;
+  const [image, setImage] = useState("");
 
   return (
     <>
@@ -31,6 +34,7 @@ const List = ({ data = [], totalCount, loadMore }: ListProps) => {
                 className="w-10 h-10 rounded-2xl"
                 src={element.thumbnail}
                 alt={element.name}
+                onClick={() => setImage(element.thumbnail)}
               />
             </div>
             <div>
@@ -45,6 +49,18 @@ const List = ({ data = [], totalCount, loadMore }: ListProps) => {
         ))}
       </div>
       {isEndListReached() ? null : <div onClick={loadMore}>load more</div>}
+      {!!image && (
+        <Modal>
+          <DissmissableOverlay onClose={() => setImage("")}>
+            <div
+              className={"absolute top-2/4 left-2/4"}
+              style={{ transform: "translate(-50%, -50%)" }}
+            >
+              <img src={image} alt={"Overlayed"} />
+            </div>
+          </DissmissableOverlay>
+        </Modal>
+      )}
     </>
   );
 };
