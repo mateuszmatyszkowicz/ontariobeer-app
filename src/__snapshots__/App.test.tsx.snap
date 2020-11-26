@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders application 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <h1>
+      Frontend developer coding test
+    </h1>
+    <div>
+      <div
+        data-testid="column-1"
+      >
+        <select
+          data-testid="select"
+        >
+          <option
+            disabled=""
+            hidden=""
+            selected=""
+            value=""
+          >
+            Select your brewery
+          </option>
+        </select>
+        <div
+          class="column-content"
+        />
+      </div>
+      <div
+        data-testid="column-2"
+      >
+        <select
+          data-testid="select"
+        >
+          <option
+            disabled=""
+            hidden=""
+            selected=""
+            value=""
+          >
+            Select your brewery
+          </option>
+        </select>
+        <div
+          class="column-content"
+        />
+      </div>
+      <div
+        data-testid="column-3"
+      >
+        <select
+          data-testid="select"
+        >
+          <option
+            disabled=""
+            hidden=""
+            selected=""
+            value=""
+          >
+            Select your brewery
+          </option>
+        </select>
+        <div
+          class="column-content"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
