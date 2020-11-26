@@ -19,12 +19,9 @@ const List = ({ data = [], totalCount, loadMore }: ListProps) => {
 
   return (
     <>
-      <div>
-        totalCount: {totalCount}, dataLength: {data.length}
-      </div>
-      <div data-testid={"beer-list"}>
+      <div data-testid={"list"}>
         {data.map((element) => (
-          <div data-testid={`beer-item-${element.id}`} key={element.id}>
+          <div data-testid={`list-item-${element.id}`} key={element.id}>
             <div>{element.name}</div>
             <div>{element.thumbnail}</div>
             <div>{element.type}</div>

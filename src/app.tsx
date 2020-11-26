@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext, setLoading, setError, setData } from "./app-context";
-import Column from "./column.component";
-import "./App.css";
-import Settings from "./settings.component";
+import { AppContext } from "./shared/app.context";
+import Column from "./components/cloumn/column.component";
+import Settings from "./components/settings/settings.component";
+import { setData, setError, setLoading } from "./shared/app.actions";
 
 function App() {
   const [appState, dispatch] = useContext(AppContext);

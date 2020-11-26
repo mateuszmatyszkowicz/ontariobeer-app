@@ -1,6 +1,8 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { AppContext } from "./app-context";
-import List, { ListItem } from "./list.component";
+import { createColumnStoreKey } from "../../shared/app.constants";
+import { AppContext } from "../../shared/app.context";
+import List, { ListItem } from "../list/list.component";
+import { getBeersPaginated } from "./column.logic";
 
 type ColumnProps = {
   id: string;
@@ -10,7 +12,7 @@ const Column = ({ id }: ColumnProps) => {
   const [appState] = useContext(AppContext);
   const { byBrewers, brewers, itemsPerPage } = appState;
   const options = brewers;
-  const storageId = `column-${id}`;
+  const storageId = createColumnStoreKey(id);
   const [selectValue, setSelectValue] = useState("");
   const [beers, setBeers] = useState<ListItem[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -30,33 +32,17 @@ const Column = ({ id }: ColumnProps) => {
   }, [storageId, selectValue]);
 
   useEffect(() => {
-    // 15- as configurable variable
-    const beers: ListItem[] =
-      byBrewers?.[selectValue]?.slice(0, itemsPerPage)?.map((brewers) => ({
-        id: brewers.productId.toString(),
-        name: brewers.name,
-        type: brewers.type,
-        thumbnail: brewers.thumbnail,
-        ppl: brewers.price.toString(), // calculate price per liter
-      })) || [];
-    setBeers(beers);
-    setTotalCount(byBrewers?.[selectValue]?.length || 0);
-  }, [selectValue, byBrewers, itemsPerPage]);
+    if (byBrewers?.[selectValue]) {
+      const { beers, totalCount } = getBeersPaginated(
+        byBrewers[selectValue],
+        page,
+        itemsPerPage
+      );
 
-  useEffect(() => {
-    const beers: ListItem[] =
-      byBrewers?.[selectValue]
-        ?.slice(0, itemsPerPage * page)
-        ?.map((brewers) => ({
-          id: brewers.productId.toString(),
-          name: brewers.name,
-          type: brewers.type,
-          thumbnail: brewers.thumbnail,
-          ppl: brewers.price.toString(), // calculate price per liter
-        })) || [];
-    setBeers(beers);
-    setTotalCount(byBrewers?.[selectValue]?.length || 0);
-  }, [page, selectValue, itemsPerPage, byBrewers]);
+      setBeers(beers);
+      setTotalCount(totalCount);
+    }
+  }, [page, selectValue, byBrewers, itemsPerPage]);
 
   const onLoadMore = useCallback(() => {
     setPage(page + 1);

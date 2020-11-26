@@ -9,7 +9,7 @@ test("renders empty list", () => {
     <List data={[]} totalCount={0} loadMore={loadMore} />
   );
 
-  const list = getByTestId(/beer-list/i);
+  const list = getByTestId(/list/i);
   expect(list).toBeInTheDocument();
   expect(list).toBeEmptyDOMElement();
 });
@@ -22,7 +22,7 @@ test("renders list with data", () => {
     <List data={data} totalCount={data.length} loadMore={loadMore} />
   );
 
-  const listOfItems = getAllByTestId(/beer-item/i);
+  const listOfItems = getAllByTestId(/list-item/i);
   expect(listOfItems).toHaveLength(data.length);
 });
 

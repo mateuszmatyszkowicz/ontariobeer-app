@@ -5,11 +5,11 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import App from "./App";
+import App from "./app";
 
 // eslint-disable-next-line
 import beersApiResponse from "./__mocks__/beers-api-response.json";
-import { AppContextProvider } from "./app-context";
+import { AppContextProvider } from "./shared/app.context";
 
 const BREWER_OPTIONS = [
   "Molson",

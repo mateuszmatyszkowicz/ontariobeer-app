@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
-import { AppContext, setItemsPerPage, setTheme } from "./app-context";
-import Modal from "./modal.component";
+import { setItemsPerPage, setTheme } from "../../shared/app.actions";
+import { AppContext } from "../../shared/app.context";
+import Modal from "../modal/modal.component";
 
 const Settings = () => {
   const [appState, dispatch] = useContext(AppContext);
@@ -16,8 +17,7 @@ const Settings = () => {
   );
 
   const onItemsPeraPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value)
-    // dispatch(setItemsPerPage(parseInt(e.target.value)));
+    dispatch(setItemsPerPage(e.target.value));
   };
 
   return open ? (

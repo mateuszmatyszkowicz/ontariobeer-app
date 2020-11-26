@@ -1,7 +1,8 @@
 import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import Column from "./column.component";
-import { AppContext, AppState, Brewer, initialState } from "./app-context";
+import { AppContext, initialState } from "../../shared/app.context";
+import { AppState, Brewer } from "../../shared/app.types";
 
 const COLUMN_TEST_ID = "test";
 const OPTIONS_TEST = ["a", "b", "c"];
@@ -11,10 +12,10 @@ const BREWERS = {
       productId: 123,
       name: "name",
       type: "type",
-      size: "",
-      price: 1,
+      size: "1  x  Can 1000 ml",
+      price: 30,
       thumbnail: "thumbnail",
-      brewer: "",
+      brewer: "brewer",
     },
   ],
 };
@@ -28,10 +29,10 @@ const BREWERS_BIG_LIST = {
           productId: k,
           name: "name",
           type: "type",
-          size: "",
-          price: 1,
+          size: "1  x  Can 1000 ml",
+          price: 30,
           thumbnail: "thumbnail",
-          brewer: "",
+          brewer: "brewer",
         } as Brewer)
     ),
   ],
@@ -70,7 +71,7 @@ test("renders column", () => {
 test("renders column to be empty at begining", () => {
   const { getByTestId } = renderColumn();
 
-  const column = getByTestId("beer-list");
+  const column = getByTestId("list");
   expect(column).toBeEmptyDOMElement();
 });
 
@@ -135,7 +136,7 @@ test("should render appropirate list based on selected option", async () => {
   expect(await findByText("name")).toBeInTheDocument();
   expect(await findByText("thumbnail")).toBeInTheDocument();
   expect(await findByText("type")).toBeInTheDocument();
-  expect(await findByText(1)).toBeInTheDocument();
+  expect(await findByText("30.00")).toBeInTheDocument();
 });
 
 test("should render first 25 if are available", async () => {
@@ -149,7 +150,7 @@ test("should render first 25 if are available", async () => {
     target: { value: OPTIONS_TEST[0] },
   });
 
-  const beerList = await findAllByTestId(/beer-item-/i);
+  const beerList = await findAllByTestId(/list-item-/i);
 
   expect(beerList).toHaveLength(listElementsCount);
 });

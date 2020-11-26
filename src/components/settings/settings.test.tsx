@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import Settings from "./settings.component";
 import userEvent from "@testing-library/user-event";
-import { AppContextProvider } from "./app-context";
+import { AppContextProvider } from "../../shared/app.context";
 
 const renderSetting = () =>
   render(
