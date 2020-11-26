@@ -25,6 +25,11 @@ export const AppContextProvider: React.FC = ({ children }) => {
   const { themeMode, itemsPerPage } = state;
   // Perhaps we could serialize whole appState and save it to localStorage some window event.
   useEffect(() => {
+    if (themeMode === "dark")
+      document?.querySelector("html")?.classList.add("dark");
+    if (themeMode !== "dark")
+      document?.querySelector("html")?.classList.remove("dark");
+
     localStorage.setItem(THEME_STORE_KEY, themeMode);
   }, [themeMode]);
 

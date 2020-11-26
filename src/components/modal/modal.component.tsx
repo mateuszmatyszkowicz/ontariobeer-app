@@ -5,12 +5,9 @@ const modalRoot = document.createElement("div");
 modalRoot.setAttribute("id", "modal-root");
 document.body.appendChild(modalRoot);
 
-type ModalProps = {
-  onClose: () => void;
-};
-
-const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
+const Modal: React.FC = ({ children }) => {
   const el = document.createElement("div");
+  el.className = "fixed inset-0 bg-gray-800 bg-opacity-50"
 
   useEffect(() => {
     modalRoot.appendChild(el);
@@ -20,14 +17,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
     };
   });
 
-  return ReactDOM.createPortal(
-    <div onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
-    </div>,
-    el
-  );
+  return ReactDOM.createPortal(children, el);
 };
 
 export default Modal;

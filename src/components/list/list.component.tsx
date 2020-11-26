@@ -21,11 +21,26 @@ const List = ({ data = [], totalCount, loadMore }: ListProps) => {
     <>
       <div data-testid={"list"}>
         {data.map((element) => (
-          <div data-testid={`list-item-${element.id}`} key={element.id}>
-            <div>{element.name}</div>
-            <div>{element.thumbnail}</div>
-            <div>{element.type}</div>
-            <div>{element.ppl}</div>
+          <div
+            className="flex items-center p-4 bg-white rounded-lg shadow-xs "
+            data-testid={`list-item-${element.id}`}
+            key={element.id}
+          >
+            <div className="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full">
+              <img
+                className="w-10 h-10 rounded-2xl"
+                src={element.thumbnail}
+                alt={element.name}
+              />
+            </div>
+            <div>
+              <p className="mb-2 text-sm font-medium text-gray-600 ">
+                {element.name} ({element.type})
+              </p>
+              <p className="text-lg font-semibold text-gray-700">
+                {element.ppl}$
+              </p>
+            </div>
           </div>
         ))}
       </div>

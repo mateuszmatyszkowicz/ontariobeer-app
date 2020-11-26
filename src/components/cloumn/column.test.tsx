@@ -129,14 +129,14 @@ test("should save selected value to localStorage if any", () => {
 });
 
 test("should render appropirate list based on selected option", async () => {
-  const { findByText, getByTestId } = renderColumn();
+  const { findByText, getByTestId , findByAltText} = renderColumn();
   fireEvent.change(getByTestId("select"), {
     target: { value: OPTIONS_TEST[0] },
   });
-  expect(await findByText("name")).toBeInTheDocument();
-  expect(await findByText("thumbnail")).toBeInTheDocument();
-  expect(await findByText("type")).toBeInTheDocument();
-  expect(await findByText("30.00")).toBeInTheDocument();
+  expect(await findByText(/name/i)).toBeInTheDocument();
+  expect(await findByAltText("name")).toBeInTheDocument();
+  expect(await findByText(/type/i)).toBeInTheDocument();
+  expect(await findByText(/30.00/i)).toBeInTheDocument();
 });
 
 test("should render first 25 if are available", async () => {

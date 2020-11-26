@@ -14,7 +14,7 @@ const renderSetting = () =>
 test("renders settings modal open/close", () => {
   const { getByText, getByTestId } = renderSetting();
 
-  const settingsButton = getByText("Settings");
+  const settingsButton = getByTestId(/settings/i);
   expect(settingsButton).toBeInTheDocument();
 
   userEvent.click(settingsButton);
@@ -22,7 +22,7 @@ test("renders settings modal open/close", () => {
   const settingsModal = getByTestId(/settings-modal/i);
   expect(settingsModal).toBeInTheDocument();
 
-  const closeButton = getByText("Close");
+  const closeButton = getByTestId(/close-icon/i);
   expect(closeButton).toBeInTheDocument();
 
   userEvent.click(closeButton);
@@ -31,8 +31,8 @@ test("renders settings modal open/close", () => {
 });
 
 test("renders options within modal with default values", () => {
-  const { getByText, getByTestId } = renderSetting();
-  const settingsButton = getByText("Settings");
+  const { getByTestId } = renderSetting();
+  const settingsButton = getByTestId(/settings/i);
   expect(settingsButton).toBeInTheDocument();
 
   userEvent.click(settingsButton);
